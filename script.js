@@ -1,5 +1,7 @@
 const canvas = document.querySelector("canvas");
 const   ctx = canvas.getContext("2d");
+
+//canvas setup
 let speed = 150
 const scale = 10
 canvas.height = 300;
@@ -17,6 +19,8 @@ food.draw()
 snake.draw()
 }())
 
+
+//Game loop
 setInterval(onTimerTick, speed); 
 function onTimerTick() {
     ctx.clearRect(0,0, canvas.width, canvas.height)

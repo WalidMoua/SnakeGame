@@ -1,6 +1,9 @@
+//snake set up
 let colorSnake = "#fffff0"
 let direction ;
 let total = 1;
+
+//draw Snake
 function Snake() {
     this.y = canvas.width/2;
     this.x = canvas.height/2;
@@ -16,6 +19,8 @@ function Snake() {
         ctx.fillStyle = colorSnake
         ctx.fillRect(this.x, this.y, scale, scale) 
     }
+
+    //update every object in canvas
     this.update= () => {
         for (let i = 0; i< this.snakeTail.length-1;i++) {
             this.snakeTail[i]=this.snakeTail[i+1]
@@ -28,18 +33,22 @@ function Snake() {
         this.checkEat()
         this.checkDeath()
     }
+
+    //Check for exit of the snake
     this.checkEdge = () => {
     if(this.y >= canvas.height) {return this.y = 0}
     else if (this.y < 0) {return this.y = canvas.height}
     else if (this.x >= canvas.width) { return this.x = 0}
     else if (this.x <0) {return this.x = canvas.width}
     }
+    //change direction of the snake 
     this.checkMove = () => {  
         if     (direction==38) {this.y=this.y-scale;}
         else if(direction==37) {this.x=this.x-scale;}
         else if(direction==40) {this.y=this.y+scale;}
         else if(direction==39) {this.x= this.x+scale;}
         }
+    //check if the snake ate food    
     this.checkEat = () => {
         if(this.x == food.x && this.y == food.y){
             food = new Food();
@@ -47,6 +56,8 @@ function Snake() {
             
         }
     }
+
+    //check if the snake collide with itself
     this.checkDeath = () => {
         for(let i=0;i<this.snakeTail.length; i++){
             if (this.snakeTail[i].x == this.x && this.snakeTail[i].y==this.y){
@@ -64,6 +75,8 @@ function Snake() {
         }
     }
 }
+
+//check for arrow keypress
 document.onkeydown = checkMove
 function checkMove (e) {
 e = e || window.event;
